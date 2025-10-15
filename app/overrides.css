@@ -1,0 +1,46 @@
+/* Minimal global overrides: white site background and black text only.
+   We intentionally avoid overriding button backgrounds so they remain
+   visible and retain their original styling. */
+
+:root {
+  --site-bg: #ffffff; /* white background */
+  --site-fg: #000000; /* black text */
+}
+
+html, body, #__next {
+  background-color: var(--site-bg) !important;
+  color: var(--site-fg) !important;
+}
+
+/* Force primary text elements to be black */
+h1, h2, h3, h4, h5, h6, p, li, a, span, small {
+  color: var(--site-fg) !important;
+}
+
+/* Buttons keep their backgrounds, but their text should be black */
+button, input[type="button"], input[type="submit"], .btn, [data-slot="button"] {
+  color: var(--site-fg) !important;
+}
+
+/* Ensure buttons are visible: prefer a light background with subtle border if none provided */
+button, .btn, [data-slot="button"] {
+  background-color: transparent !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03) !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 0.5rem !important;
+}
+
+/* Navbar: ensure it uses the white site background and keeps text black */
+header, nav, .site-header, .navbar {
+  background-color: var(--site-bg) !important;
+  color: var(--site-fg) !important;
+  border-bottom: 1px solid rgba(0,0,0,0.04) !important;
+}
+
+/* Special case for CTA buttons that should keep green background: preserve background but force black text */
+.btn-cta, .cta, .bg-green-600, button.bg-green-600, .bg-green-800 {
+  color: var(--site-fg) !important;
+}
+
+

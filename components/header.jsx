@@ -16,15 +16,16 @@ export default function Header() {
   const path = usePathname();
 
   return (
-    <header className="fixed top-0 w-full border-b bg-white/95 backdrop-blur z-50 supports-[backdrop-filter]:bg-white/60">
+  <header className="fixed top-0 w-full border-b bg-background/95 backdrop-blur z-50 supports-[backdrop-filter]:bg-background/60">
       <nav className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <Image
-            src={"/logos/logo.png"}
-            alt="Vehiql Logo"
-            width={200}
-            height={60}
-            className="h-11 w-auto object-contain"
+            src={"/logos/paysapallogo.png"}
+            alt="PaySaPal Logo"
+            width={400}
+            height={180}
+            className="h-14 md:h-20 w-auto object-contain"
+            priority
           />
         </Link>
 
@@ -50,12 +51,12 @@ export default function Header() {
             <Link href="/dashboard">
               <Button
                 variant="outline"
-                className="hidden md:inline-flex items-center gap-2 hover:text-green-600 hover:border-green-600 transition"
+                className="hidden md:inline-flex items-center gap-2 hover:text-green-600 hover:border-green-600 transition cursor-pointer"
               >
                 <LayoutDashboard className="h-4 w-4" />
                 Dashboard
               </Button>
-              <Button variant="ghost" className="md:hidden w-10 h-10 p-0">
+              <Button variant="ghost" className="md:hidden w-10 h-10 p-0 cursor-pointer">
                 <LayoutDashboard className="h-4 w-4" />
               </Button>
             </Link>

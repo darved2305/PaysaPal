@@ -74,8 +74,9 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  /* Light theme: cream background and near-black text */
+  --background: #f8f6f0;
+  --foreground: #111111;
 }
 
 .dark {
@@ -119,6 +120,11 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Force standard text elements to use the foreground color (black) */
+  h1, h2, h3, h4, h5, h6, p, li, a, span, button {
+    color: var(--foreground) !important;
+  }
 }
 
 @utility gradient {
@@ -126,5 +132,72 @@
 }
 
 @utility gradient-title {
-  @apply gradient font-extrabold tracking-tighter text-transparent bg-clip-text pb-1 pr-2;
+  /* Render hero title as plain foreground (black) instead of gradient */
+  @apply font-extrabold tracking-tighter text-foreground pb-1 pr-2;
 }
+
+/* --------------------------------------------------------------------------
+   Global visual overrides requested by the user
+   - Apply the site background color everywhere
+   - Replace green accents/backgrounds with the page background color
+   - Make button text and interactive control text black
+   These rules intentionally use plain CSS (no Tailwind at-rules) so they
+   apply even if Tailwind macros are not executed by the tooling.
+   -------------------------------------------------------------------------- */
+
+:root {
+  /* ensure the same bg/fg tokens are available */
+  --site-bg: var(--background);
+  --site-fg: var(--foreground);
+}
+
+/* Force the page background and base foreground color */
+html, body {
+  background-color: var(--site-bg) !important;
+  color: var(--site-fg) !important;
+}
+
+/* Ensure headings and paragraph text use the foreground color */
+h1, h2, h3, h4, h5, h6, p, li, a, span, small {
+  color: var(--site-fg) !important;
+}
+
+/* Buttons: text should be black (foreground) regardless of background */
+button, input[type="button"], input[type="submit"], .btn, [data-slot="button"] {
+  color: var(--site-fg) !important;
+}
+
+/* Replace common green background utility classes with the page background */
+.bg-green-50, .bg-green-100, .bg-green-200, .bg-green-300, .bg-green-400,
+.bg-green-500, .bg-green-600, .bg-green-700, .bg-green-800, .bg-green-900,
+.from-green-600, .to-teal-500, .from-green-500, .bg-emerald-500 {
+  background-color: var(--site-bg) !important;
+  border-color: var(--site-bg) !important;
+}
+
+/* Replace green text colors with the normal foreground (black) */
+.text-green-50, .text-green-100, .text-green-200, .text-green-300, .text-green-400,
+.text-green-500, .text-green-600, .text-green-700, .text-green-800, .text-green-900 {
+  color: var(--site-fg) !important;
+}
+
+/* If you use a gradient utility for hero or sections, force it to the bg color */
+.gradient, .gradient-title, .bg-gradient-to-r {
+  background: var(--site-bg) !important;
+  background-image: none !important;
+}
+
+/* Badge and small accent containers: remove green fills */
+.badge, .rounded-full.bg-green-100, .rounded-full.bg-green-50 {
+  background-color: var(--site-bg) !important;
+  color: var(--site-fg) !important;
+}
+
+/* Icon fills that used a green color */
+.icon-green, svg[class*="green"], .text-green-600 svg, .text-green-700 svg {
+  fill: var(--site-fg) !important;
+  color: var(--site-fg) !important;
+}
+
+/* End overrides */
+
