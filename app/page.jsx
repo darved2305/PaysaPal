@@ -114,7 +114,7 @@ export default function LandingPage() {
       </div>
 
       <footer className="border-t bg-gray-50 py-12 text-center text-sm text-muted-foreground">
-        @Copyright 2025 - Made byy team GitGoneWild
+  @Copyright 2025 - Made by team GitGoneWild
       </footer>
     </div>
   );
